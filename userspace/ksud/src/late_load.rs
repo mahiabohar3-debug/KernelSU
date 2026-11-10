@@ -119,7 +119,7 @@ pub fn run(package_name: &String, kmi: Option<String>, allow_shell: bool) -> Res
     }
 
     // 10. Execute metamodule mount script (OverlayFS)
-    if let Err(e) = metamodule::exec_mount_script(defs::MODULE_DIR) {
+    if let Err(e) = crate::mount::mount_modules_systemlessly(defs::MODULE_DIR) {
         warn!("execute metamodule mount failed: {e}");
     }
 

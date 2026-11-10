@@ -59,3 +59,7 @@ prop-rs-android = { git = "https://github.com/KernelSU2/ksu_props", rev = "ddb6e
 
 [build-dependencies]
 bindgen = "0.72"
+
+[target.'cfg(any(target_os = "linux", target_os = "android"))'.dependencies]
+procfs = "0.17"
+loopdev = { git = "https://github.com/KernelSU-Next/loopdev" }
