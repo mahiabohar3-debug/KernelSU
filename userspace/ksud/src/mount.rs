@@ -1,3 +1,4 @@
+#![allow(clippy::all, clippy::pedantic)]
 use std::collections::HashMap;
 use crate::defs;
 use anyhow::{Result, anyhow, bail};
