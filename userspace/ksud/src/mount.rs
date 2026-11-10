@@ -78,7 +78,7 @@ pub fn mount_ext4(source: impl AsRef<Path>, target: impl AsRef<Path>) -> Result<
             MoveMountFlags::MOVE_MOUNT_F_EMPTY_PATH,
         )?;
     } else {
-        mount(lo, target.as_ref(), "ext4", MountFlags::empty(), "")?;
+        mount(lo, target.as_ref(), "ext4", MountFlags::empty(), None)?;
     }
     Ok(())
 }
@@ -145,12 +145,13 @@ pub fn mount_overlayfs(
         if let (Some(upperdir), Some(workdir)) = (upperdir, workdir) {
             data = format!("{data},upperdir={upperdir},workdir={workdir}");
         }
+        let data_cstr = std::ffi::CString::new(data)?;
         mount(
             KSU_OVERLAY_SOURCE,
             dest.as_ref(),
             "overlay",
             MountFlags::empty(),
-            data,
+            Some(data_cstr.as_c_str()),
         )?;
     }
     Ok(())
@@ -177,7 +178,7 @@ pub fn mount_tmpfs(dest: impl AsRef<Path>) -> Result<()> {
             dest.as_ref(),
             "tmpfs",
             MountFlags::empty(),
-            "",
+            None,
         )?;
     }
     Ok(())
@@ -210,7 +211,7 @@ pub fn bind_mount(from: impl AsRef<Path>, to: impl AsRef<Path>) -> Result<()> {
             to.as_ref(),
             "",
             MountFlags::BIND | MountFlags::REC,
-            "",
+            None,
         )?;
     }
     Ok(())
