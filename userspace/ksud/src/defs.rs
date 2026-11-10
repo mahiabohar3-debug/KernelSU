@@ -72,3 +72,6 @@ pub const FULL_VERSION: &str = const_format::formatcp!(
 
 #[cfg(target_os = "android")]
 pub use android::*;
+pub const KSU_OVERLAY_SOURCE: &str = "KSU";
+pub const SYSTEM_RW_DIR: &str = "/data/adb/ksu/system_rw";
+pub const SKIP_MOUNT_FILE_NAME: &str = "skip_mount";

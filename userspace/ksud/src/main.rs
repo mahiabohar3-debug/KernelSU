@@ -73,4 +73,4 @@ fn main() -> anyhow::Result<()> {
         cli_non_android::run()
     }
 }
-mod mount;
+#[cfg(target_os = "android")] mod mount;
