@@ -57,7 +57,7 @@ jobs:
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
       run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
+        if [ true ]; then
           export KSU_PACKAGE_NAME="me.weishu.kernelsu.pr"
         fi
         if [ "${{ inputs.target }}" = riscv64-linux-android ]; then
